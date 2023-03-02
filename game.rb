@@ -1,12 +1,12 @@
 class TicTacToe
-    @@sym1 = ''
-    @@sym2 = ''
+    @@sym1 = 'N'
+    @@sym2 = 'B'
     @@name = ''
     @@name2 = ''
-    @@check_robot = ['','','','','','','','','','']
+    @@check_robot = ['1','2','3','4','5','6','7','8','9']
     def start_game()
         #ask_symbol()
-        print_board()
+        #print_board()
         ask_move()
     end
 
@@ -22,9 +22,16 @@ class TicTacToe
         @@sym2 = gets
     end
 
-    def print_board()
+    def print_board() #add a way to update the board
+        position = [1,2,3,4,5,6,7,8,9]
+        #@@check_robot.each_with_index do |x,ind|
+        #    if x == @sym1
+        #        position[ind] = @@sym1
+        #    end
+        #end
+        #p position
         puts """
-         1 | 2 | 3
+         #{position[0]} | #{position[1]} | #{position[2]}
         ---+---+---
          4 | 5 | 6
         ---+---+---
@@ -33,21 +40,22 @@ class TicTacToe
     end
 
     def ask_move()
-        #a code that change the number in to their symbol
-        puts "#{@@name} please enter a number (1-9) that is available to place '#{@@sym1}'"
-        move = gets
-        #move -= 1
-        @@check_robot.map { |x| x == move ? @@sym1 : '' }
-        print @@check_robot
-        print_board(move)
+        x = 0
+        while x < 3
+            puts "#{@@name} please enter a number (1-9) that is available to place '#{@@sym1}'"
+            move = gets.chomp #chomp is fucking important
+            @@check_robot.each_with_index do |x, ind|
+                if x == move
+                    @@check_robot[ind] = @@sym1
+                end
+            end
+            p @@check_robot
+            x+= 1
+            print_board()
+        end
+        #ilagay yung mga tira sa isang array then use that array to check the 
+        #winner and use that to update the board
     end
-
-    def update_board()
-    end
-
-    #def checker()
-        #if @@check_robot[0]
-    #end
 end
 
 new_game = TicTacToe.new()
