@@ -1,8 +1,8 @@
 class TicTacToe
     @@sym1 = 'N'
     @@sym2 = 'B'
-    @@name = ''
-    @@name2 = ''
+    @@name = 'Nhoj'
+    @@name2 = 'Ber'
     @@check_robot = ['1','2','3','4','5','6','7','8','9']
     def start_game()
         #ask_symbol()
@@ -39,16 +39,25 @@ class TicTacToe
         ---+---+---\n"""
     end
 
+    def update_check(move,sym)
+        @@check_robot.each_with_index do |x, ind|
+            if x == move
+                @@check_robot[ind] = sym
+            end
+        end
+    end
+
     def ask_move()
         x = 0
         while x < 3
             puts "#{@@name} please enter a number (1-9) that is available to place '#{@@sym1}'"
             move = gets.chomp #chomp is fucking important
-            @@check_robot.each_with_index do |x, ind|
-                if x == move
-                    @@check_robot[ind] = @@sym1
-                end
-            end
+            update_check(move,@@sym1)
+            p @@check_robot
+            puts "#{@@name2} please enter a number (1-9) that is available to place '#{@@sym2}'"
+        
+            move = gets.chomp
+            update_check(move,@@sym2)
             p @@check_robot
             x+= 1
             print_board()
