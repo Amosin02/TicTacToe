@@ -91,7 +91,8 @@ class TicTacToe
 
             #check the rows
             if x.uniq.length == 1
-                puts "Game Over! #{x[0]} won"
+                data = x[0]
+                say_name(data)
                 ask_new_game()
             end
         end
@@ -116,9 +117,18 @@ class TicTacToe
 
        huge.each do |d|
         if d.uniq.length == 1
-            puts "Game Over! #{d[0]} won"
+            data = d[0]
+            say_name(data)
             ask_new_game()
         end
+       end
+    end
+
+    def say_name(data)
+       if data == @@sym1
+        puts "Game Over! #{@@name} won!"
+       elsif data == @@sym2
+        puts "Game Over! #{@@name2} won!"
        end
     end
 
